@@ -44,6 +44,16 @@
   when: >
         (ansible_distribution == "Ubuntu" and
         ansible_distribution_version >= "18.04")
+        
+ - name: setting PHP version
+  set_fact:
+    phpenmod_command: phpenmod
+    php_path: etc/php/7.4  #no leading / for template path
+    php_sqlite_package: php7.4-sqlite3
+    php_ver: 7.4
+  when: >
+        (ansible_distribution == "Ubuntu" and
+        ansible_distribution_version >= "20.04")
 
 - name: Setting Debian Packages To Install
   set_fact:
