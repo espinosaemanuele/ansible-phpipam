@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: ansible-phpipam
   author: Larry Smith Jr.
   description: An Ansible role that installs/configures phpIPAM http://phpipam.net/
   license: MIT
