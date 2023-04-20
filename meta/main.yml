@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: ansible-phpipam
-  author: Larry Smith Jr.
+  namespace: CoffeeITWorks
   description: An Ansible role that installs/configures phpIPAM http://phpipam.net/
   license: MIT
   min_ansible_version: 1.2
