@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: ansible-phpipam
+  role_name: ansible_phpipam
   author: "coffeeitworks"
   company: coffeeITWorks
   description: An Ansible role that installs/configures phpIPAM http://phpipam.net/
