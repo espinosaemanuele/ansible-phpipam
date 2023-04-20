@@ -5,3 +5,4 @@ docker
 flake8
 molecule
 testinfra
+molecule-docker
