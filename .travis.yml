@@ -2,15 +2,13 @@
 dist: focal
 sudo: required
 language: python
-  - "3.5"
 services:
   - docker
 before_install:
   - sudo apt-get -qq update
 install:
   - pip3 install -r requirements.txt
-#  - ansible --version
-  - pip3 install ansible==2.7.10.0
+  - ansible --version
   - molecule --version
 script:
   #- molecule test --scenario-name centos7
@@ -23,5 +21,5 @@ script:
   - molecule test --scenario-name ubuntu1804
   - molecule test --scenario-name ubuntu2004
   
-#notifications:
-#  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
