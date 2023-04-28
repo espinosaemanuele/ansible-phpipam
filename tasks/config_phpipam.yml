@@ -1,5 +1,5 @@
 ---
-- name: config_phpipam | installing phpIPAM from git
+- name: Config_phpipam | installing phpIPAM from git
   git:
     repo: "https://github.com/phpipam/phpipam.git"
     dest: "{{ phpipam_install_dir }}"
@@ -12,7 +12,7 @@
   become: true
   when: phpipam_install_from_git
 
-- name: config_phpipam | creating phpipam web config
+- name: Config_phpipam | creating phpipam web config
   template:
     src: config.php.j2
     dest: "{{ phpipam_install_dir + '/config.php' }}"
@@ -21,7 +21,7 @@
     backup: yes
   become: true
 
-- name: config_phpipam | configuring .htacess
+- name: Config_phpipam | configuring .htacess
   template:
     src: htaccess.j2
     dest: "{{ phpipam_install_dir + '/.htaccess' }}"
@@ -30,7 +30,7 @@
     backup: yes
   become: true
 
-- name: config_phpipam | Customizing DB Schema
+- name: Config_phpipam | Customizing DB Schema
   template:
     src: SCHEMA.sql.j2
     dest: "{{ phpipam_install_dir + '/db/SCHEMA.sql' }}"
@@ -40,7 +40,7 @@
   become: true
   when: phpipam_custom_db_schema
 
-- name: config_phpipam | creating phpipam db
+- name: Config_phpipam | creating phpipam db
   mysql_db:
     name: "{{ phpipam_db_name }}"
     state: present
@@ -49,7 +49,7 @@
         phpipam_pre_load_db and
         not phpipam_db_cluster
 
-- name: config_phpipam | creating phpipam db
+- name: Config_phpipam | creating phpipam db
   mysql_db:
     name: "{{ phpipam_db_name }}"
     state: present
@@ -59,7 +59,7 @@
         phpipam_db_cluster and
         (inventory_hostname == phpipam_primary)
 
-- name: config_phpipam | creating phpipam db user
+- name: Config_phpipam | creating phpipam db user
   mysql_user:
     name: "{{ phpipam_db_user }}"
     password: "{{ phpipam_db_pass }}"
@@ -71,7 +71,7 @@
   when: >
         not phpipam_db_cluster
 
-- name: config_phpipam | creating phpipam db user
+- name: Config_phpipam | creating phpipam db user
   mysql_user:
     name: "{{ phpipam_db_user }}"
     password: "{{ phpipam_db_pass }}"
@@ -84,7 +84,7 @@
         phpipam_db_cluster and
         (inventory_hostname == phpipam_primary)
 
-- name: config_phpipam | Checking If DB Tables Exist
+- name: Config_phpipam | Checking If DB Tables Exist
   command: >
            mysql
            -u {{ phpipam_db_user }}
@@ -96,7 +96,7 @@
   changed_when: false
   when: phpipam_pre_load_db
 
-- name: config_phpipam | importing phpipam database
+- name: Config_phpipam | importing phpipam database
   mysql_db:
     name: "{{ phpipam_db_name }}"
     state: import
@@ -107,7 +107,7 @@
         ('ipaddresses' not in phpipam_tables.stdout_lines) and
         not phpipam_db_cluster
 
-- name: config_phpipam | importing phpipam database
+- name: Config_phpipam | importing phpipam database
   mysql_db:
     name: "{{ phpipam_db_name }}"
     state: import
@@ -191,7 +191,7 @@
 #         phpipam_patch_discovery is defined and
 #         phpipam_patch_discovery
 
-- name: config_phpipam | Ensuring Permissions Are Correctly Set
+- name: Config_phpipam | Ensuring Permissions Are Correctly Set
   file:
     path: "{{ phpipam_install_dir }}"
     group: "{{ web_group }}"
