@@ -1,6 +1,6 @@
 ---
 - name: Debian | installing pre-req packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ phpipam_debian_packages }}"
     state: present
   become: true
@@ -10,14 +10,14 @@
 # mbstring package is not available on debian 8 or ubuntu 14.04 for php5 is embeded on libapache2-mod-php5
 # http://askubuntu.com/questions/491629/how-to-install-php-mbstring-extension-in-ubuntu/491631
 - name: Debian | installing pre-req mbstring package
-  apt:
+  ansible.builtin.apt:
     name: "php{{ php_ver }}-mbstring"
     state: present
   become: true
   register: result
   until: result is succeeded
   notify:
-    - restart apache2
+    - Restart apache2
   when: >
     (ansible_distribution == "Debian" and
     ansible_distribution_major_version <= "7") or
@@ -25,7 +25,7 @@
     ansible_distribution_release != "trusty")
 
 - name: Debian | Installing Git
-  apt:
+  ansible.builtin.apt:
     name: git
     state: present
   become: true
@@ -33,8 +33,8 @@
   until: result is succeeded
   when: phpipam_install_from_git
 
-- name: debian | enabling php mcrypt module
-  command: "{{ phpenmod_command }} mcrypt"
+- name: Debian | enabling php mcrypt module
+  ansible.builtin.command: "{{ phpenmod_command }} mcrypt"
   become: true
   changed_when: false
   when: >
@@ -45,9 +45,9 @@
     ansible_distribution_major_version >= '9')
 
 - name: Debian | enabling apache mod_rewrite
-  apache2_module:
+  community.general.apache2_module:
     name: rewrite
     state: present
   become: true
-  notify: restart apache2
+  notify: Restart apache2
   when: phpipam_prettify_links
