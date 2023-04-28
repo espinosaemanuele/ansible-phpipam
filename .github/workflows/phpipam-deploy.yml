@@ -1,8 +1,19 @@
-run-playbook:
+name: phpipam-deploy
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  run-playbook:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
 		# The validate Job need to be sucessfull
-		       needs: [ validate ]
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
