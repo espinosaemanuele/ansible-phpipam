@@ -1,6 +1,6 @@
 ---
-- name: config_apache2 | reconfiguring default website
-  template:
+- name: Config_apache2 | reconfiguring default website
+  ansible.builtin.template:
     src: etc/apache2/sites-available/000-default.conf.j2
     dest: /etc/apache2/sites-available/000-default.conf
     owner: root
@@ -8,11 +8,11 @@
     mode: 0644
     backup: yes
   become: true
-  notify: restart apache2
+  notify: Restart apache2
   when: ansible_os_family == "Debian"
 
-- name: config_apache2 | reconfiguring default website
-  template:
+- name: Config_apache2 | reconfiguring default website
+  ansible.builtin.template:
     src: etc/httpd/conf/httpd.conf.j2
     dest: /etc/httpd/conf/httpd.conf
     owner: root
@@ -20,11 +20,11 @@
     mode: 0644
     backup: yes
   become: true
-  notify: restart httpd
+  notify: Restart httpd
   when: ansible_os_family == "RedHat"
 
-- name: config_apache2 | enabling php mod extensions
-  command: "{{ phpenmod_command }} {{ item }}"
+- name: Config_apache2 | enabling php mod extensions
+  ansible.builtin.command: "{{ phpenmod_command }} {{ item }}"
   become: true
   with_items:
     - json
