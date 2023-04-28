@@ -1,34 +1,42 @@
 ---
-# tasks file for ansible-phpipam
-- include: set_facts.yml
 
-- include: upgrade.yml
+- name: Include set_facts
+  ansible.builtin.include: set_facts.yml
+
+- name: Include upgrade
+  ansible.builtin.include: upgrade.yml
   when: >
         phpipam_upgrade or
         phpipam_install_from_git
 
-- include: debian.yml
+- name: Include debian
+  ansible.builtin.include: debian.yml
   when: ansible_os_family == "Debian"
 
-- include: redhat.yml
+- name: Include redhat
+  ansible.builtin.include: redhat.yml
   when: ansible_os_family == "RedHat"
 
-- include: cron.yml
+- name: Include cron
+  ansible.builtin.include: cron.yml
   tags:
     - config_cron
 
-- include: config_apache2.yml
+- name: Include config_apache2
+  ansible.builtin.include: config_apache2.yml
   tags:
     - config_apache2
   when: >
         phpipam_prettify_links is defined and
         phpipam_prettify_links
 
-- include: config_phpipam.yml
+- name: Include config_phpipam
+  ansible.builtin.include: config_phpipam.yml
   tags:
     - config_phpipam
 
-- include: backups.yml
+- name: Include backups
+ansible.builtin.include: backups.yml
   tags:
     - phpipam_db_backups
   when: >
