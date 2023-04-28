@@ -3,6 +3,7 @@
   ansible.builtin.file:
     path: "{{ phpipam_db_backup_dir }}"
     state: directory
+    mode: 0644
   become: true
 
 - name: Backups | creating backup cron job
