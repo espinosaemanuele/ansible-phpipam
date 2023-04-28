@@ -1,18 +1,18 @@
 ---
 - name: Setting fact Debian apache2
-  set_fact:
+  ansible.builtin.set_fact:
     web_group: www-data
     web_owner: www-data
   when: ansible_os_family == "Debian"
 
 - name: Setting fact RedHat apache
-  set_fact:
+  ansible.builtin.set_fact:
     web_group: apache
     web_owner: apache
   when: ansible_os_family == "RedHat"
 
 - name: Setting PHP version
-  set_fact:
+  ansible.builtin.set_fact:
     phpenmod_command: php5enmod
     php_path: etc/php5  #no leading / for template path
     php_sqlite_package: php5-sqlite
@@ -23,7 +23,7 @@
         ansible_distribution_version <= "14.04")
 
 - name: Setting PHP version
-  set_fact:
+  ansible.builtin.set_fact:
     phpenmod_command: phpenmod
     php_path: etc/php/7.0  #no leading / for template path
     php_sqlite_package: php7.0-sqlite3
@@ -36,7 +36,7 @@
         ansible_distribution_version >= "9")
 
 - name: Setting PHP version
-  set_fact:
+  ansible.builtin.set_fact:
     phpenmod_command: phpenmod
     php_path: etc/php/7.2  #no leading / for template path
     php_sqlite_package: php7.2-sqlite3
@@ -46,7 +46,7 @@
         ansible_distribution_version >= "18.04")
         
 - name: Setting PHP version
-  set_fact:
+  ansible.builtin.set_fact:
     phpenmod_command: phpenmod
     php_path: etc/php/7.4  #no leading / for template path
     php_sqlite_package: php7.4-sqlite3
@@ -56,7 +56,7 @@
         ansible_distribution_version >= "20.04")
 
 - name: Setting Debian Packages To Install
-  set_fact:
+  ansible.builtin.set_fact:
     phpipam_debian_packages:
       - fping
       - "libapache2-mod-php{{ php_ver }}"
@@ -80,7 +80,7 @@
         ansible_distribution_version >= "8")
 
 - name: Setting Debian Packages To Install
-  set_fact:
+  ansible.builtin.set_fact:
     phpipam_debian_packages:
       - fping
       - "libapache2-mod-php{{ php_ver }}"
@@ -100,7 +100,7 @@
         ansible_distribution_version >= "18.04")
 
 - name: Setting RedHat Packages To Install
-  set_fact:
+  ansible.builtin.set_fact:
     phpipam_redhat_packages:
       - anacron
       - fping
