@@ -4,7 +4,7 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: verify apache
+  - name: Verify apache
     uri:
       url: http://localhost/
       status_code: 200
