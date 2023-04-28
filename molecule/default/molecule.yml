@@ -7,9 +7,9 @@ dependency:
 driver:
   name: docker
 lint: |
-  yamllint .
+  set -e
   ansible-lint
-  flake8
+  yamllint .
 platforms:
   - name: ubuntu2004
     image: jrei/systemd-ubuntu:20.04
