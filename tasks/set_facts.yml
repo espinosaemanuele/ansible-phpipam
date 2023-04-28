@@ -1,17 +1,17 @@
 ---
-- name: setting fact Debian apache2
+- name: Setting fact Debian apache2
   set_fact:
     web_group: www-data
     web_owner: www-data
   when: ansible_os_family == "Debian"
 
-- name: setting fact RedHat apache
+- name: Setting fact RedHat apache
   set_fact:
     web_group: apache
     web_owner: apache
   when: ansible_os_family == "RedHat"
 
-- name: setting PHP version
+- name: Setting PHP version
   set_fact:
     phpenmod_command: php5enmod
     php_path: etc/php5  #no leading / for template path
@@ -22,7 +22,7 @@
         (ansible_distribution == "Ubuntu" and
         ansible_distribution_version <= "14.04")
 
-- name: setting PHP version
+- name: Setting PHP version
   set_fact:
     phpenmod_command: phpenmod
     php_path: etc/php/7.0  #no leading / for template path
@@ -35,7 +35,7 @@
         (ansible_distribution == "Debian" and
         ansible_distribution_version >= "9")
 
-- name: setting PHP version
+- name: Setting PHP version
   set_fact:
     phpenmod_command: phpenmod
     php_path: etc/php/7.2  #no leading / for template path
@@ -45,7 +45,7 @@
         (ansible_distribution == "Ubuntu" and
         ansible_distribution_version >= "18.04")
         
-- name: setting PHP version
+- name: Setting PHP version
   set_fact:
     phpenmod_command: phpenmod
     php_path: etc/php/7.4  #no leading / for template path
