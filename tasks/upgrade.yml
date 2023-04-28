@@ -1,5 +1,5 @@
 ---
-- name: Upgrade | checking if {{ phpipam_install_dir }} exists
+- name: Upgrade | checking {{ phpipam_install_dir }}
   ansible.builtin.stat:
     path: "{{ phpipam_install_dir }}"
   register: phpipam_install_dir_check
