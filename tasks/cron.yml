@@ -2,7 +2,7 @@
 # These are only required until newer version of phpIPAM in hopes of fixing php scripts
 # removing all cron jobs to ensure everything is clean
 - name: Cron | cleaning up old cron jobs
-  file:
+  ansible.builtin.file:
     path: "/etc/cron.d/{{ item }}"
     state: absent
   become: true
@@ -14,7 +14,7 @@
     - phpipam_resolveIP
 
 - name: Cron | adding cron job for discoveryCheck (Non-Clustered DB)
-  cron:
+  ansible.builtin.cron:
     name: phpipam discoveryCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/discoveryCheck.php"
     minute: "*/15"
@@ -30,7 +30,7 @@
         not phpipam_db_cluster
 
 - name: Cron | adding cron job for discoveryCheck (Clustered DB)
-  cron:
+  ansible.builtin.cron:
     name: phpipam discoveryCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/discoveryCheck.php"
     minute: "*/15"
@@ -47,7 +47,7 @@
         phpipam_db_cluster
 
 - name: Cron | adding cron job for pingCheck
-  cron:
+  ansible.builtin.cron:
     name: phpipam pingCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/pingCheck.php"
     minute: "*/15"
@@ -61,7 +61,7 @@
   when: phpipam_define_cron_jobs
 
 - name: Cron | adding cron job for resolveIPaddresses
-  cron:
+  ansible.builtin.cron:
     name: phpipam resolveIPaddresses
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/resolveIPaddresses.php"
     minute: "0"
@@ -75,7 +75,7 @@
   when: phpipam_define_cron_jobs
 
 - name: Cron | removing cron job for discoveryCheck
-  cron:
+  ansible.builtin.cron:
     name: phpipam discoveryCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/discoveryCheck.php"
     minute: "*/15"
@@ -89,7 +89,7 @@
   when: not phpipam_define_cron_jobs
 
 - name: Cron | removing cron job for pingCheck
-  cron:
+  ansible.builtin.cron:
     name: phpipam pingCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/pingCheck.php"
     minute: "*/15"
@@ -103,7 +103,7 @@
   when: not phpipam_define_cron_jobs
 
 - name: Cron | removing cron job for resolveIPaddresses
-  cron:
+  ansible.builtin.cron:
     name: phpipam resolveIPaddresses
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/resolveIPaddresses.php"
     minute: "0"
