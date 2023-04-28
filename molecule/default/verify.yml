@@ -4,6 +4,7 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: Example assertion
-    ansible.builtin.assert:
-    that: true
+  - name: verify apache
+    uri:
+      url: http://localhost/
+      status_code: 200
