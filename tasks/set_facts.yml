@@ -45,7 +45,7 @@
         (ansible_distribution == "Ubuntu" and
         ansible_distribution_version >= "18.04")
         
- - name: setting PHP version
+- name: setting PHP version
   set_fact:
     phpenmod_command: phpenmod
     php_path: etc/php/7.4  #no leading / for template path
