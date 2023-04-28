@@ -5,6 +5,6 @@
   hosts: all
   tasks:
   - name: Verify apache
-    uri:
+    ansible.builtin.uri:
       url: http://localhost/
       status_code: 200
