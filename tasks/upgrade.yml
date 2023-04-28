@@ -8,5 +8,3 @@
   ansible.builtin.command: "mv {{ phpipam_install_dir }} {{ phpipam_install_dir }}.{{ date }}"
   become: true
   changed_when: phpipam_install_dir_check.stat.isdir is defined and phpipam_install_dir_check.stat.isdir
-
-
