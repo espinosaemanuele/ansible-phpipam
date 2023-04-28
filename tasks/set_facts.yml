@@ -44,7 +44,7 @@
   when: >
         (ansible_distribution == "Ubuntu" and
         ansible_distribution_version >= "18.04")
-        
+
 - name: Setting PHP version
   ansible.builtin.set_fact:
     phpenmod_command: phpenmod
