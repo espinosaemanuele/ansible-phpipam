@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Include ansible-apache2
+      ansible.builtin.include_role:
+        name: ansible-apache2
+    - name: Include ansible-mysql
+      ansible.builtin.include_role:
+        name: ansible-mysql
+    - name: Include ansible-phpipam
+      ansible.builtin.include_role:
+        name: ansible-phpipam
