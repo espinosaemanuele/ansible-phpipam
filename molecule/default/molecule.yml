@@ -22,7 +22,5 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
-  playbooks:
-    converge: ../shared/converge.yml
 verifier:
   name: ansible
