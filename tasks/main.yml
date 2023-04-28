@@ -18,7 +18,7 @@
   when: ansible_os_family == "RedHat"
 
 - name: Include cron
-  import_tasks: cron.yml
+  ansible.builtin.import_tasks: cron.yml
   tags:
     - config_cron
 
