@@ -4,7 +4,7 @@
     path: "{{ phpipam_install_dir }}"
   register: phpipam_install_dir_check
 
-- name: Upgrade | moving directory phpipam_install_dir {{ phpipam_install_dir }}.{{ date }}
+- name: Upgrade | moving directory {{ phpipam_install_dir }}
   ansible.builtin.command: "mv {{ phpipam_install_dir }} {{ phpipam_install_dir }}.{{ date }}"
   become: true
   when: phpipam_install_dir_check.stat.exists
