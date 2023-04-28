@@ -5,7 +5,7 @@
     phpipam_pre_load_db: false
   pre_tasks:
     - name: Installing MySQL
-      apt:
+      ansible.builtin.apt:
         name: ['mysql-server', 'python-mysqldb']
         state: present
       become: true
@@ -17,7 +17,7 @@
             (ansible_distribution == "Ubuntu")
 
     - name: Installing MySQL
-      apt:
+      ansible.builtin.apt:
         name: ['mariadb-server']
         state: present
       become: true
@@ -28,7 +28,7 @@
             ansible_distribution_version >= '9.0')
 
     - name: Installing MySQL Pre-Reqs
-      yum:
+      ansible.builtin.yum:
         name: ['MySQL-python']
         state: present
       become: true
@@ -39,7 +39,7 @@
             ansible_distribution != "Fedora"
 
     - name: Installing MySQL
-      yum:
+      ansible.builtin.yum:
         name: ['mariadb', 'mariadb-server']
         state: present
       become: true
@@ -51,14 +51,14 @@
             ansible_distribution_version >= '7'
 
     - name: Ensuring MySQL Service Is Running
-      service:
+      ansible.builtin.service:
         name: mysql
         state: started
       become: true
       when: ansible_os_family == "Debian"
 
     - name: Ensuring mariadb Service Is Started
-      service:
+      ansible.builtin.service:
         name: mariadb
         state: started
         enabled: true
