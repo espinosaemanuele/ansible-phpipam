@@ -1,7 +1,7 @@
 ---
 # These are only required until newer version of phpIPAM in hopes of fixing php scripts
 # removing all cron jobs to ensure everything is clean
-- name: cron | cleaning up old cron jobs
+- name: Cron | cleaning up old cron jobs
   file:
     path: "/etc/cron.d/{{ item }}"
     state: absent
@@ -13,7 +13,7 @@
     # - phpipam_pingCheck
     - phpipam_resolveIP
 
-- name: cron | adding cron job for discoveryCheck (Non-Clustered DB)
+- name: Cron | adding cron job for discoveryCheck (Non-Clustered DB)
   cron:
     name: phpipam discoveryCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/discoveryCheck.php"
@@ -29,7 +29,7 @@
         phpipam_define_cron_jobs and
         not phpipam_db_cluster
 
-- name: cron | adding cron job for discoveryCheck (Clustered DB)
+- name: Cron | adding cron job for discoveryCheck (Clustered DB)
   cron:
     name: phpipam discoveryCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/discoveryCheck.php"
@@ -46,7 +46,7 @@
         (inventory_hostname == phpipam_primary) and
         phpipam_db_cluster
 
-- name: cron | adding cron job for pingCheck
+- name: Cron | adding cron job for pingCheck
   cron:
     name: phpipam pingCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/pingCheck.php"
@@ -60,7 +60,7 @@
   become: true
   when: phpipam_define_cron_jobs
 
-- name: cron | adding cron job for resolveIPaddresses
+- name: Cron | adding cron job for resolveIPaddresses
   cron:
     name: phpipam resolveIPaddresses
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/resolveIPaddresses.php"
@@ -74,7 +74,7 @@
   become: true
   when: phpipam_define_cron_jobs
 
-- name: cron | removing cron job for discoveryCheck
+- name: Cron | removing cron job for discoveryCheck
   cron:
     name: phpipam discoveryCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/discoveryCheck.php"
@@ -88,7 +88,7 @@
   become: true
   when: not phpipam_define_cron_jobs
 
-- name: cron | removing cron job for pingCheck
+- name: Cron | removing cron job for pingCheck
   cron:
     name: phpipam pingCheck
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/pingCheck.php"
@@ -102,7 +102,7 @@
   become: true
   when: not phpipam_define_cron_jobs
 
-- name: cron | removing cron job for resolveIPaddresses
+- name: Cron | removing cron job for resolveIPaddresses
   cron:
     name: phpipam resolveIPaddresses
     job: "/usr/bin/php {{ phpipam_install_dir }}/functions/scripts/resolveIPaddresses.php"
