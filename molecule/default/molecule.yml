@@ -2,8 +2,6 @@
 dependency:
   name: galaxy
   enabled: true
-  options:
-    role-file: requirements-molecule.yml
 driver:
   name: docker
 lint: |
