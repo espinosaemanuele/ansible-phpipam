@@ -1,6 +1,6 @@
 ---
 - name: Config_phpipam | installing phpIPAM from git
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/phpipam/phpipam.git"
     dest: "{{ phpipam_install_dir }}"
     version: "{{ phpipam_install_git_version|default ('HEAD') }}"
@@ -13,7 +13,7 @@
   when: phpipam_install_from_git
 
 - name: Config_phpipam | creating phpipam web config
-  template:
+  ansible.builtin.template:
     src: config.php.j2
     dest: "{{ phpipam_install_dir + '/config.php' }}"
     owner: "{{ web_owner }}"
@@ -22,7 +22,7 @@
   become: true
 
 - name: Config_phpipam | configuring .htacess
-  template:
+  ansible.builtin.template:
     src: htaccess.j2
     dest: "{{ phpipam_install_dir + '/.htaccess' }}"
     owner: root
@@ -31,7 +31,7 @@
   become: true
 
 - name: Config_phpipam | Customizing DB Schema
-  template:
+  ansible.builtin.template:
     src: SCHEMA.sql.j2
     dest: "{{ phpipam_install_dir + '/db/SCHEMA.sql' }}"
     owner: root
@@ -192,7 +192,7 @@
 #         phpipam_patch_discovery
 
 - name: Config_phpipam | Ensuring Permissions Are Correctly Set
-  file:
+  ansible.builtin.file:
     path: "{{ phpipam_install_dir }}"
     group: "{{ web_group }}"
     owner: "{{ web_owner }}"
