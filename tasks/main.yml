@@ -36,7 +36,7 @@
     - config_phpipam
 
 - name: Include backups
-ansible.builtin.include: backups.yml
+  ansible.builtin.include: backups.yml
   tags:
     - phpipam_db_backups
   when: >
