@@ -30,7 +30,7 @@ jobs:
   # uses: ansible/ansible-lint-action@912d1bf4240f503c2b7e50a6cacadd7df5c3dd82
         uses: ansible/ansible-lint-action@v6.15.0
       - name: Install test dependencies
-        run: pip3 install molecule[docker] yamllint ansible-lint
+        run: pip3 install molecule[docker] yamllint ansible-lint ansible docker flake8 testinfra 
       - name: Test molecule
         run: molecule test
         env:
