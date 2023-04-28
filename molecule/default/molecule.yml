@@ -8,8 +8,8 @@ driver:
   name: docker
 lint: |
   set -e
-  ansible-lint
   yamllint .
+  ansible-lint
 platforms:
   - name: ubuntu2004
     image: jrei/systemd-ubuntu:20.04
