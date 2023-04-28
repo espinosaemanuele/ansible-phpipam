@@ -1,20 +1,20 @@
 ---
 
 - name: Include set_facts
-  import_tasks: set_facts.yml
+  ansible.builtin.import_tasks: set_facts.yml
 
 - name: Include upgrade
-  import_tasks: upgrade.yml
+  ansible.builtin.import_tasks: upgrade.yml
   when: >
         phpipam_upgrade or
         phpipam_install_from_git
 
 - name: Include debian
-  import_tasks: debian.yml
+  ansible.builtin.import_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
 - name: Include redhat
-  import_tasks: redhat.yml
+  ansible.builtin.import_tasks: redhat.yml
   when: ansible_os_family == "RedHat"
 
 - name: Include cron
@@ -23,7 +23,7 @@
     - config_cron
 
 - name: Include config_apache2
-  import_tasks: config_apache2.yml
+  ansible.builtin.import_tasks: config_apache2.yml
   tags:
     - config_apache2
   when: >
@@ -31,12 +31,12 @@
         phpipam_prettify_links
 
 - name: Include config_phpipam
-  import_tasks: config_phpipam.yml
+  ansible.builtin.import_tasks: config_phpipam.yml
   tags:
     - config_phpipam
 
 - name: Include backups
-  import_tasks: backups.yml
+  ansible.builtin.import_tasks: backups.yml
   tags:
     - phpipam_db_backups
   when: >
