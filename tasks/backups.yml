@@ -1,12 +1,12 @@
 ---
 - name: Backups | ensuring backups folder exists
-  file:
+  ansible.builtin.file:
     path: "{{ phpipam_db_backup_dir }}"
     state: directory
   become: true
 
 - name: Backups | creating backup cron job
-  cron:
+  ansible.builtin.cron:
     name: phpipam DB Backups
     job: '/usr/bin/mysqldump -u {{ phpipam_db_user }} -p{{ phpipam_db_pass }} {{ phpipam_db_name }} > {{ phpipam_db_backup_dir }}/{{ phpipam_db_backup_name_prefix }}_$(date +"\%y\%m\%d").db'
     special_time: daily
@@ -16,7 +16,7 @@
   become: true
 
 - name: Backups | creating backup cleanup cron job
-  cron:
+  ansible.builtin.cron:
     name: phpipam DB Backups cleanup
     job: '/usr/bin/find {{ phpipam_db_backup_dir }}/ -ctime +10 -exec rm {} \;'
     special_time: daily
