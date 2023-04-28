@@ -1,10 +1,10 @@
 ---
 - name: Upgrade | checking if {{ phpipam_install_dir }} exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ phpipam_install_dir }}"
   register: phpipam_install_dir_check
 
 - name: Upgrade | moving {{ phpipam_install_dir }} directory to {{ phpipam_install_dir }}.{{ date }}
-  command: "mv {{ phpipam_install_dir }} {{ phpipam_install_dir }}.{{ date }}"
+  ansible.builtin.command: "mv {{ phpipam_install_dir }} {{ phpipam_install_dir }}.{{ date }}"
   become: true
   when: phpipam_install_dir_check.stat.exists
