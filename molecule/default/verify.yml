@@ -6,4 +6,4 @@
   tasks:
   - name: Example assertion
     ansible.builtin.assert:
-      that: true
+    that: true
